@@ -433,6 +433,32 @@
     </div>
 </section>
 
+<!-- Video Channel Section -->
+@if(isset($videos) && $videos->count() > 0)
+<section class="section-padding bg-dark text-white">
+    <div class="container">
+        <div class="section-title-container text-center mb-5">
+            <span class="text-uppercase text-secondary fw-bold d-block mb-2" style="font-size: 0.85rem; letter-spacing: 1px;">Kanal Youtube</span>
+            <h2 class="section-title text-white">Kanal Video Terbaru</h2>
+        </div>
+        <div class="row">
+            @foreach($videos as $video)
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card border-0 bg-transparent h-100">
+                    <div class="ratio ratio-16x9 rounded overflow-hidden shadow-sm">
+                        <iframe src="https://www.youtube.com/embed/{{ $video->youtube_id }}" title="{{ $video->title }}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                    </div>
+                    <div class="card-body px-0 pt-3 pb-0">
+                        <h6 class="fw-bold text-white lh-base">{{ $video->title }}</h6>
+                    </div>
+                </div>
+            </div>
+            @endforeach
+        </div>
+    </div>
+</section>
+@endif
+
 <!-- Maps & Contact Form section -->
 <section class="section-padding bg-light">
     <div class="container">

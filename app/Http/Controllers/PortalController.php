@@ -16,6 +16,7 @@ use App\Models\Message;
 use App\Models\Carousel;
 use App\Models\Major;
 use App\Models\Download;
+use App\Models\Video;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -45,6 +46,7 @@ class PortalController extends Controller
         $alumni_count = Alumni::count();
         $carousels = Carousel::where('is_active', true)->orderBy('order_index', 'asc')->get();
         $contact_captcha_question = $this->generateContactCaptcha();
+        $videos = Video::where('is_active', true)->latest()->get();
 
         // Fetch teachers, extracurriculars, and facilities for homepage sections
         $teachers = Teacher::where('is_active', true)->get();
@@ -64,7 +66,8 @@ class PortalController extends Controller
             'contact_captcha_question',
             'teachers',
             'ekskuls',
-            'facilities'
+            'facilities',
+            'videos'
         ));
     }
 

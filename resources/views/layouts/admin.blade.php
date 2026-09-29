@@ -126,6 +126,12 @@
                         <span>Unduhan</span>
                     </a>
                 </li>
+                <li class="vx-menu-item {{ Route::is('admin.videos*') ? 'active' : '' }}">
+                    <a href="{{ route('admin.videos') }}" class="vx-menu-link">
+                        <i class="fa-brands fa-youtube"></i>
+                        <span>Kanal Video</span>
+                    </a>
+                </li>
                 <li class="vx-menu-item {{ Route::is('admin.agendas*') ? 'active' : '' }}">
                     <a href="{{ route('admin.agendas') }}" class="vx-menu-link">
                         <i class="fa-solid fa-calendar-days"></i>

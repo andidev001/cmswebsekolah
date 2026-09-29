@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\AnnouncementController;
 use App\Http\Controllers\Admin\DownloadController;
+use App\Http\Controllers\Admin\VideoController;
 use App\Http\Controllers\Admin\CommentController;
 use App\Http\Controllers\Admin\AgendaController;
 use App\Http\Controllers\Admin\AchievementController;
@@ -148,6 +149,15 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
     Route::get('/downloads/show/{id}', [DownloadController::class, 'show'])->name('admin.downloads.show');
     Route::post('/downloads/update/{id}', [DownloadController::class, 'update'])->name('admin.downloads.update');
     Route::delete('/downloads/destroy/{id}', [DownloadController::class, 'destroy'])->name('admin.downloads.destroy');
+
+    // Kanal Video
+    Route::get('/videos', [VideoController::class, 'index'])->name('admin.videos');
+    Route::get('/videos/data', [VideoController::class, 'getData'])->name('admin.videos.data');
+    Route::post('/videos/store', [VideoController::class, 'store'])->name('admin.videos.store');
+    Route::get('/videos/show/{id}', [VideoController::class, 'show'])->name('admin.videos.show');
+    Route::post('/videos/update/{id}', [VideoController::class, 'update'])->name('admin.videos.update');
+    Route::post('/videos/toggle-status/{id}', [VideoController::class, 'toggleStatus'])->name('admin.videos.toggle-status');
+    Route::delete('/videos/destroy/{id}', [VideoController::class, 'destroy'])->name('admin.videos.destroy');
 
     // Agenda Kegiatan
     Route::get('/agendas', [AgendaController::class, 'index'])->name('admin.agendas');
