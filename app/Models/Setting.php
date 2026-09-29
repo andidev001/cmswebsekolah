@@ -28,6 +28,8 @@ class Setting extends Model
         'facebook_url',
         'instagram_url',
         'youtube_url',
+        'meta_description',
+        'meta_keywords',
         'theme',
         'whatsapp_number',
         'whatsapp_welcome_message',

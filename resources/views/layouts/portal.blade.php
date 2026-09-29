@@ -5,6 +5,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="@yield('meta_description', $settings->meta_description ?? 'Website Resmi ' . ($settings->school_name ?? 'Sekolah'))">
+    <meta name="keywords" content="@yield('meta_keywords', $settings->meta_keywords ?? 'sekolah, pendidikan, ' . ($settings->school_name ?? ''))">
+    <meta name="author" content="{{ $settings->school_name ?? 'Sekolah' }}">
+    <link rel="canonical" href="{{ url()->current() }}">
+
+    <!-- Open Graph / Social Media -->
+    <meta property="og:title" content="@yield('title') - {{ $settings->school_name ?? 'Sekolah' }}">
+    <meta property="og:description" content="@yield('meta_description', $settings->meta_description ?? 'Website Resmi ' . ($settings->school_name ?? 'Sekolah'))">
+    <meta property="og:image" content="@yield('meta_image', $settings->school_logo_url ?? asset('default-og.png'))">
+    <meta property="og:url" content="{{ url()->current() }}">
+    <meta property="og:type" content="@yield('og_type', 'website')">
+
     <title>@yield('title') - {{ $settings->school_name ?? 'SMK Yapisda Cisoka' }}</title>
 
     <!-- Favicon -->

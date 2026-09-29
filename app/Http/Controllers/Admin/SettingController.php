@@ -47,6 +47,8 @@ class SettingController extends Controller
             'instagram_url' => 'nullable|url|max:255',
             'youtube_url' => 'nullable|url|max:255',
             'theme' => 'required|string|in:default,emerald,crimson,amethyst,dark',
+            'meta_description' => 'nullable|string',
+            'meta_keywords' => 'nullable|string',
             'whatsapp_number' => 'nullable|string|max:50',
             'whatsapp_welcome_message' => 'nullable|string',
             'school_logo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',

@@ -61,6 +61,9 @@ Route::get('/hubungi', [PortalController::class, 'hubungi'])->name('portal.hubun
 Route::post('/hubungi/kirim', [PortalController::class, 'hubungiKirim'])->name('portal.hubungi.kirim')->middleware('throttle:5,1');
 Route::get('/ppdb', [PortalController::class, 'ppdb'])->name('portal.ppdb');
 
+// Sitemap
+Route::get('/sitemap.xml', [\App\Http\Controllers\SitemapController::class, 'index'])->name('sitemap');
+
 // ==========================================
 // 2. AUTHENTICATION ROUTES
 // ==========================================

@@ -108,6 +108,17 @@
                         <label for="youtube_url" class="form-label">URL Youtube Channel</label>
                         <input type="url" class="form-control" id="youtube_url" name="youtube_url" value="{{ $setting->youtube_url }}" placeholder="https://youtube.com/c/sekolah">
                     </div>
+
+                    <h6 class="fw-bold text-primary mt-4 mb-3"><i class="fa-solid fa-magnifying-glass me-2"></i> Pengaturan SEO (Google Search)</h6>
+                    <div class="mb-3">
+                        <label for="meta_description" class="form-label">Deskripsi Singkat (Meta Description)</label>
+                        <textarea class="form-control" id="meta_description" name="meta_description" rows="3" placeholder="Tuliskan 1-2 kalimat menarik tentang sekolah ini. Akan tampil di hasil pencarian Google.">{{ $setting->meta_description }}</textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="meta_keywords" class="form-label">Kata Kunci (Meta Keywords)</label>
+                        <input type="text" class="form-control" id="meta_keywords" name="meta_keywords" value="{{ $setting->meta_keywords }}" placeholder="sekolah unggulan, smk terbaik, pendaftaran siswa baru">
+                        <small class="text-muted d-block mt-1">Pisahkan dengan koma.</small>
+                    </div>
                 </div>
 
                 <!-- Right Column: Visi Misi & Sambutan Kepala Sekolah -->

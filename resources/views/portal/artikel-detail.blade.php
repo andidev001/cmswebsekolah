@@ -1,7 +1,9 @@
 @extends('layouts.portal')
 
 @section('title', $post->title)
-
+@section('meta_description', Str::limit(strip_tags($post->content), 150))
+@section('meta_image', $post->image_url)
+@section('og_type', 'article')
 @section('content')
 <!-- Page Header Banner (Condensed) -->
 <div class="bg-primary text-white py-4" style="background: linear-gradient(135deg, #1e3a8a, #0f172a) !important;">
