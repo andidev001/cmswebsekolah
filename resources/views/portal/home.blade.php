@@ -455,6 +455,11 @@
             </div>
             @endforeach
         </div>
+        <div class="text-center mt-4">
+            <a href="{{ route('portal.video') }}" class="btn btn-outline-light rounded-pill px-4 py-2 fw-semibold">
+                Lihat Semua Video <i class="fa-solid fa-arrow-right ms-2"></i>
+            </a>
+        </div>
     </div>
 </section>
 @endif

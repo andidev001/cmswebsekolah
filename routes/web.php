@@ -52,6 +52,7 @@ Route::post('/artikel/komentar/store', [PortalController::class, 'storeComment']
 Route::get('/pengumuman', [PortalController::class, 'pengumuman'])->name('portal.pengumuman');
 Route::get('/pengumuman/{slug}', [PortalController::class, 'pengumumanDetail'])->name('portal.pengumuman.detail');
 Route::get('/unduhan', [PortalController::class, 'unduhan'])->name('portal.unduhan');
+Route::get('/video', [PortalController::class, 'video'])->name('portal.video');
 Route::get('/agenda', [PortalController::class, 'agenda'])->name('portal.agenda');
 Route::get('/prestasi', [PortalController::class, 'prestasi'])->name('portal.prestasi');
 Route::get('/alumni', [PortalController::class, 'alumni'])->name('portal.alumni');

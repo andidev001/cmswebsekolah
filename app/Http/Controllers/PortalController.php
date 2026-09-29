@@ -46,7 +46,7 @@ class PortalController extends Controller
         $alumni_count = Alumni::count();
         $carousels = Carousel::where('is_active', true)->orderBy('order_index', 'asc')->get();
         $contact_captcha_question = $this->generateContactCaptcha();
-        $videos = Video::where('is_active', true)->latest()->get();
+        $videos = Video::where('is_active', true)->latest()->limit(3)->get();
 
         // Fetch teachers, extracurriculars, and facilities for homepage sections
         $teachers = Teacher::where('is_active', true)->get();
@@ -206,6 +206,13 @@ class PortalController extends Controller
         $settings = $this->getSettings();
         $downloads = Download::latest()->paginate(10);
         return view('portal.unduhan', compact('settings', 'downloads'));
+    }
+
+    public function video()
+    {
+        $settings = $this->getSettings();
+        $videos = Video::where('is_active', true)->latest()->paginate(9);
+        return view('portal.video', compact('settings', 'videos'));
     }
 
     public function prestasi()
