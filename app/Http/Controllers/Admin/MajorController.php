@@ -47,6 +47,11 @@ class MajorController extends Controller
             'name' => 'required|string|max:255',
             'description' => 'nullable|string',
             'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ], [
+            'photo.uploaded' => 'Gagal mengupload foto. Pastikan ukuran file tidak melebihi batas maksimal server (biasanya 2MB).',
+            'photo.max' => 'Ukuran foto maksimal adalah 2MB.',
+            'photo.image' => 'File harus berupa gambar.',
+            'name.required' => 'Nama jurusan wajib diisi.',
         ]);
 
         if ($request->hasFile('photo')) {
@@ -78,6 +83,11 @@ class MajorController extends Controller
             'name' => 'required|string|max:255',
             'description' => 'nullable|string',
             'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ], [
+            'photo.uploaded' => 'Gagal mengupload foto. Pastikan ukuran file tidak melebihi batas maksimal server (biasanya 2MB).',
+            'photo.max' => 'Ukuran foto maksimal adalah 2MB.',
+            'photo.image' => 'File harus berupa gambar.',
+            'name.required' => 'Nama jurusan wajib diisi.',
         ]);
 
         if ($request->hasFile('photo')) {
