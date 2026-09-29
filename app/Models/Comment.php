@@ -14,7 +14,8 @@ class Comment extends Model
         'name',
         'email',
         'body',
-        'is_approved'
+        'is_approved',
+        'admin_reply'
     ];
 
     public function post()

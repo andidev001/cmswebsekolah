@@ -128,6 +128,8 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
     // Komentar
     Route::get('/comments', [CommentController::class, 'index'])->name('admin.comments');
     Route::get('/comments/data', [CommentController::class, 'getData'])->name('admin.comments.data');
+    Route::get('/comments/show/{id}', [CommentController::class, 'show'])->name('admin.comments.show');
+    Route::post('/comments/reply/{id}', [CommentController::class, 'replyAndApprove'])->name('admin.comments.reply');
     Route::post('/comments/toggle-approve/{id}', [CommentController::class, 'toggleApprove'])->name('admin.comments.toggle-approve');
     Route::delete('/comments/destroy/{id}', [CommentController::class, 'destroy'])->name('admin.comments.destroy');
 

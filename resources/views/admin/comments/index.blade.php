@@ -29,6 +29,37 @@
         </div>
     </div>
 </div>
+
+<!-- Reply Modal -->
+<div class="modal fade" id="reply-modal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form id="reply-form">
+                <div class="modal-header bg-info text-white">
+                    <h5 class="modal-title">Balas & Setujui Komentar</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="reply-comment-id" name="id">
+                    
+                    <div class="mb-3">
+                        <label class="form-label text-muted small mb-0">Komentar Pengguna:</label>
+                        <div class="p-2 bg-light rounded border" id="user-comment-text" style="font-size: 0.9rem;"></div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="admin_reply" class="form-label">Balasan Admin</label>
+                        <textarea class="form-control" id="admin_reply" name="admin_reply" rows="4" placeholder="Ketik balasan Anda di sini... (opsional)"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn btn-info text-white" id="reply-submit-btn">Simpan Balasan & Setujui</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 @endsection
 
 @push('scripts')
@@ -56,25 +87,82 @@ $(document).ready(function() {
 
     $(document).on('click', '.toggle-btn', function() {
         let id = $(this).data('id');
+        let isApproveBtn = $(this).hasClass('btn-success');
         
+        if (isApproveBtn) {
+            // Open reply modal directly instead of just toggling
+            $.ajax({
+                url: "{{ url('admin/comments/show') }}/" + id,
+                type: "GET",
+                success: function(response) {
+                    $('#reply-comment-id').val(response.id);
+                    $('#user-comment-text').text(response.body);
+                    $('#admin_reply').val(response.admin_reply);
+                    $('#reply-modal').modal('show');
+                },
+                error: function() {
+                    Swal.fire('Error', 'Data tidak ditemukan.', 'error');
+                }
+            });
+        } else {
+            // Hide action (un-approve)
+            $.ajax({
+                url: "{{ url('admin/comments/toggle-approve') }}/" + id,
+                type: "POST",
+                success: function(response) {
+                    if(response.success) {
+                        Swal.fire({
+                            toast: true, position: 'top-end', icon: 'success',
+                            title: response.message, showConfirmButton: false, timer: 1500
+                        });
+                        table.ajax.reload(null, false);
+                    }
+                },
+                error: function() {
+                    Swal.fire('Error', 'Terjadi kesalahan sistem.', 'error');
+                }
+            });
+        }
+    });
+
+    $(document).on('click', '.reply-btn', function() {
+        let id = $(this).data('id');
         $.ajax({
-            url: "{{ url('admin/comments/toggle-approve') }}/" + id,
-            type: "POST",
+            url: "{{ url('admin/comments/show') }}/" + id,
+            type: "GET",
             success: function(response) {
+                $('#reply-comment-id').val(response.id);
+                $('#user-comment-text').text(response.body);
+                $('#admin_reply').val(response.admin_reply);
+                $('#reply-modal').modal('show');
+            },
+            error: function() {
+                Swal.fire('Error', 'Data tidak ditemukan.', 'error');
+            }
+        });
+    });
+
+    $('#reply-form').submit(function(e) {
+        e.preventDefault();
+        let id = $('#reply-comment-id').val();
+        let submitBtn = $('#reply-submit-btn');
+        submitBtn.prop('disabled', true).text('Menyimpan...');
+
+        $.ajax({
+            url: "{{ url('admin/comments/reply') }}/" + id,
+            type: "POST",
+            data: $(this).serialize(),
+            success: function(response) {
+                submitBtn.prop('disabled', false).text('Simpan Balasan & Setujui');
                 if(response.success) {
-                    Swal.fire({
-                        toast: true,
-                        position: 'top-end',
-                        icon: 'success',
-                        title: response.message,
-                        showConfirmButton: false,
-                        timer: 1500
-                    });
+                    $('#reply-modal').modal('hide');
+                    Swal.fire('Berhasil!', response.message, 'success');
                     table.ajax.reload(null, false);
                 }
             },
             error: function() {
-                Swal.fire('Error', 'Terjadi kesalahan sistem.', 'error');
+                submitBtn.prop('disabled', false).text('Simpan Balasan & Setujui');
+                Swal.fire('Error', 'Terjadi kesalahan saat membalas komentar.', 'error');
             }
         });
     });

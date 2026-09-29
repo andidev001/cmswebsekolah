@@ -63,10 +63,20 @@
                     @forelse($post->comments->where('is_approved', true) as $comment)
                         <div class="d-flex gap-3 mb-4 pb-4 border-bottom">
                             <img src="https://ui-avatars.com/api/?name={{ urlencode($comment->name) }}&background=random&color=fff" alt="Avatar" class="rounded-circle" width="50" height="50">
-                            <div>
+                            <div class="flex-grow-1">
                                 <h6 class="fw-bold mb-1">{{ $comment->name }}</h6>
                                 <small class="text-muted mb-2 d-block">{{ $comment->created_at->format('d M Y H:i') }}</small>
                                 <p class="mb-0 text-dark">{{ $comment->body }}</p>
+                                
+                                @if(!empty($comment->admin_reply))
+                                <div class="mt-3 p-3 bg-light border-start border-4 border-info rounded">
+                                    <div class="d-flex gap-2 align-items-center mb-1">
+                                        <i class="fa-solid fa-user-shield text-info"></i>
+                                        <span class="fw-bold text-dark" style="font-size: 0.9rem;">Balasan Admin</span>
+                                    </div>
+                                    <p class="mb-0 text-dark" style="font-size: 0.95rem;">{{ $comment->admin_reply }}</p>
+                                </div>
+                                @endif
                             </div>
                         </div>
                     @empty

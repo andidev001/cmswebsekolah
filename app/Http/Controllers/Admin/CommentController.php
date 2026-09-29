@@ -36,12 +36,36 @@ class CommentController extends Controller
                 } else {
                     $btn .= '<button type="button" class="btn btn-sm btn-success toggle-btn" data-id="'.$row->id.'" title="Setujui"><i class="fa-solid fa-check"></i></button>';
                 }
+                $btn .= '<button type="button" class="btn btn-sm btn-info reply-btn" data-id="'.$row->id.'" title="Balas"><i class="fa-solid fa-reply"></i></button>';
                 $btn .= '<button type="button" class="btn btn-sm btn-danger delete-btn" data-id="'.$row->id.'" title="Hapus"><i class="fa-solid fa-trash"></i></button>';
                 $btn .= '</div>';
                 return $btn;
             })
             ->rawColumns(['status', 'action'])
             ->make(true);
+    }
+
+    public function show($id)
+    {
+        $comment = Comment::findOrFail($id);
+        return response()->json($comment);
+    }
+
+    public function replyAndApprove(Request $request, $id)
+    {
+        $comment = Comment::findOrFail($id);
+        $comment->is_approved = true;
+        
+        if ($request->has('admin_reply') && !empty($request->admin_reply)) {
+            $comment->admin_reply = $request->admin_reply;
+        }
+
+        $comment->save();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Komentar berhasil disetujui dan dibalas.'
+        ]);
     }
 
     public function toggleApprove($id)
