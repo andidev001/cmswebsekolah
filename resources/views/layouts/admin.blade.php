@@ -114,6 +114,12 @@
                         <span>Pengumuman</span>
                     </a>
                 </li>
+                <li class="vx-menu-item {{ Route::is('admin.downloads*') ? 'active' : '' }}">
+                    <a href="{{ route('admin.downloads') }}" class="vx-menu-link">
+                        <i class="fa-solid fa-download"></i>
+                        <span>Unduhan</span>
+                    </a>
+                </li>
                 <li class="vx-menu-item {{ Route::is('admin.agendas*') ? 'active' : '' }}">
                     <a href="{{ route('admin.agendas') }}" class="vx-menu-link">
                         <i class="fa-solid fa-calendar-days"></i>

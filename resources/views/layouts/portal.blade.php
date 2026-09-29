@@ -663,13 +663,14 @@
                             href="{{ route('portal.artikel') }}">Berita & Blog</a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle {{ Route::is('portal.pengumuman*') || Route::is('portal.agenda*') || Route::is('portal.prestasi*') ? 'active' : '' }}"
+                        <a class="nav-link dropdown-toggle {{ Route::is('portal.pengumuman*') || Route::is('portal.unduhan*') || Route::is('portal.agenda*') || Route::is('portal.prestasi*') ? 'active' : '' }}"
                             href="#" id="navbarDropdownInfo" role="button" data-bs-toggle="dropdown"
                             aria-expanded="false">
                             Informasi
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdownInfo">
                             <li><a class="dropdown-item" href="{{ route('portal.pengumuman') }}">Pengumuman</a></li>
+                            <li><a class="dropdown-item" href="{{ route('portal.unduhan') }}">Unduhan</a></li>
                             <li><a class="dropdown-item" href="{{ route('portal.agenda') }}">Agenda Kegiatan</a></li>
                             <li><a class="dropdown-item" href="{{ route('portal.prestasi') }}">Prestasi Siswa</a></li>
                         </ul>

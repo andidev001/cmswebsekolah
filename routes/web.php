@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\ExtracurricularController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\AnnouncementController;
+use App\Http\Controllers\Admin\DownloadController;
 use App\Http\Controllers\Admin\AgendaController;
 use App\Http\Controllers\Admin\AchievementController;
 use App\Http\Controllers\Admin\AlumniController as AdminAlumniController;
@@ -47,6 +48,7 @@ Route::get('/artikel/kategori/{slug}', [PortalController::class, 'artikelKategor
 Route::get('/artikel/{slug}', [PortalController::class, 'artikelDetail'])->name('portal.artikel.detail');
 Route::get('/pengumuman', [PortalController::class, 'pengumuman'])->name('portal.pengumuman');
 Route::get('/pengumuman/{slug}', [PortalController::class, 'pengumumanDetail'])->name('portal.pengumuman.detail');
+Route::get('/unduhan', [PortalController::class, 'unduhan'])->name('portal.unduhan');
 Route::get('/agenda', [PortalController::class, 'agenda'])->name('portal.agenda');
 Route::get('/prestasi', [PortalController::class, 'prestasi'])->name('portal.prestasi');
 Route::get('/alumni', [PortalController::class, 'alumni'])->name('portal.alumni');
@@ -128,6 +130,14 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
     Route::get('/announcements/show/{id}', [AnnouncementController::class, 'show'])->name('admin.announcements.show');
     Route::post('/announcements/update/{id}', [AnnouncementController::class, 'update'])->name('admin.announcements.update');
     Route::delete('/announcements/destroy/{id}', [AnnouncementController::class, 'destroy'])->name('admin.announcements.destroy');
+
+    // Unduhan
+    Route::get('/downloads', [DownloadController::class, 'index'])->name('admin.downloads');
+    Route::get('/downloads/data', [DownloadController::class, 'getData'])->name('admin.downloads.data');
+    Route::post('/downloads/store', [DownloadController::class, 'store'])->name('admin.downloads.store');
+    Route::get('/downloads/show/{id}', [DownloadController::class, 'show'])->name('admin.downloads.show');
+    Route::post('/downloads/update/{id}', [DownloadController::class, 'update'])->name('admin.downloads.update');
+    Route::delete('/downloads/destroy/{id}', [DownloadController::class, 'destroy'])->name('admin.downloads.destroy');
 
     // Agenda Kegiatan
     Route::get('/agendas', [AgendaController::class, 'index'])->name('admin.agendas');

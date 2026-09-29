@@ -15,6 +15,7 @@ use App\Models\Alumni;
 use App\Models\Message;
 use App\Models\Carousel;
 use App\Models\Major;
+use App\Models\Download;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -170,6 +171,13 @@ class PortalController extends Controller
         $settings = $this->getSettings();
         $agendas = Agenda::latest()->paginate(6);
         return view('portal.agenda', compact('settings', 'agendas'));
+    }
+
+    public function unduhan()
+    {
+        $settings = $this->getSettings();
+        $downloads = Download::latest()->paginate(10);
+        return view('portal.unduhan', compact('settings', 'downloads'));
     }
 
     public function prestasi()
