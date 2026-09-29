@@ -11,6 +11,9 @@
     <meta name="keywords" content="@yield('meta_keywords', $settings->meta_keywords ?? 'sekolah, pendidikan, ' . ($settings->school_name ?? ''))">
     <meta name="author" content="{{ $settings->school_name ?? 'Sekolah' }}">
     <link rel="canonical" href="{{ url()->current() }}">
+    
+    <!-- Google Site Verification -->
+    <meta name="google-site-verification" content="0ldgoPicwGrftnVdSNGMzR9X9SMxO4g-WZ0EHwQji3o" />
 
     <!-- Open Graph / Social Media -->
     <meta property="og:title" content="@yield('title') - {{ $settings->school_name ?? 'Sekolah' }}">
