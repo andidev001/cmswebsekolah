@@ -19,6 +19,7 @@ class Setting extends Model
         'principal_photo',
         'vision',
         'mission',
+        'curriculum',
         'address',
         'email',
         'phone',

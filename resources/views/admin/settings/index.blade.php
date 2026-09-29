@@ -122,6 +122,12 @@
                         <textarea class="form-control" id="mission" name="mission" rows="4" placeholder="1. Misi kesatu&#10;2. Misi kedua">{{ $setting->mission }}</textarea>
                     </div>
 
+                    <h6 class="fw-bold text-primary mt-4 mb-3"><i class="fa-solid fa-book-open me-2"></i> Kurikulum</h6>
+                    <div class="mb-3">
+                        <label for="curriculum" class="form-label">Deskripsi Kurikulum Sekolah</label>
+                        <textarea class="form-control" id="curriculum" name="curriculum">{{ $setting->curriculum }}</textarea>
+                    </div>
+
                     <h6 class="fw-bold text-primary mt-4 mb-3"><i class="fa-solid fa-user me-2"></i> Sambutan Kepala Sekolah</h6>
                     <div class="mb-3">
                         <label for="principal_name" class="form-label">Nama Kepala Sekolah</label>
@@ -178,9 +184,33 @@
 </div>
 @endsection
 
+@push('styles')
+<style>
+/* Adjust CKEditor height */
+.ck-editor__editable_inline {
+    min-height: 250px;
+}
+</style>
+@endpush
+
 @push('scripts')
+<!-- CKEditor 5 Classic CDN -->
+<script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/classic/ckeditor.js"></script>
 <script>
 $(document).ready(function() {
+    let curriculumEditor;
+
+    // Initialize CKEditor 5 for Curriculum
+    ClassicEditor
+        .create(document.querySelector('#curriculum'), {
+            toolbar: [ 'heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote', 'insertTable', 'undo', 'redo' ]
+        })
+        .then(editor => {
+            curriculumEditor = editor;
+        })
+        .catch(error => {
+            console.error(error);
+        });
     // School logo preview
     $('#school_logo').change(function() {
         const file = this.files[0];
@@ -208,6 +238,11 @@ $(document).ready(function() {
     // Form submit AJAX
     $('#settings-form').on('submit', function(e) {
         e.preventDefault();
+
+        // Sync CKEditor data to textarea before submit
+        if (curriculumEditor) {
+            $('#curriculum').val(curriculumEditor.getData());
+        }
 
         let formData = new FormData(this);
 

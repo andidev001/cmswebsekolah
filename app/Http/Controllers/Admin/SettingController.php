@@ -37,6 +37,7 @@ class SettingController extends Controller
             'principal_speech' => 'nullable|string',
             'vision' => 'nullable|string',
             'mission' => 'nullable|string',
+            'curriculum' => 'nullable|string',
             'address' => 'nullable|string',
             'email' => 'nullable|email|max:255',
             'phone' => 'nullable|string|max:50',

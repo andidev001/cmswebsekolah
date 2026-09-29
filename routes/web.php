@@ -37,6 +37,7 @@ use App\Http\Controllers\PortalController;
 Route::get('/', [PortalController::class, 'index'])->name('home');
 Route::get('/sambutan', [PortalController::class, 'sambutan'])->name('portal.sambutan');
 Route::get('/visi-misi', [PortalController::class, 'visiMisi'])->name('portal.visi-misi');
+Route::get('/kurikulum', [PortalController::class, 'kurikulum'])->name('portal.kurikulum');
 Route::get('/guru', [PortalController::class, 'guru'])->name('portal.guru');
 Route::get('/ekskul', [PortalController::class, 'ekskul'])->name('portal.ekskul');
 Route::get('/fasilitas', [PortalController::class, 'fasilitas'])->name('portal.fasilitas');

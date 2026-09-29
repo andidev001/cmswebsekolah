@@ -639,7 +639,7 @@
                             href="{{ route('home') }}">Beranda</a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle {{ Route::is('portal.sambutan') || Route::is('portal.visi-misi') || Route::is('portal.guru') || Route::is('portal.jurusan') || Route::is('portal.ekskul') || Route::is('portal.fasilitas') ? 'active' : '' }}"
+                        <a class="nav-link dropdown-toggle {{ Route::is('portal.sambutan') || Route::is('portal.visi-misi') || Route::is('portal.kurikulum') || Route::is('portal.guru') || Route::is('portal.jurusan') || Route::is('portal.ekskul') || Route::is('portal.fasilitas') ? 'active' : '' }}"
                             href="#" id="navbarDropdownProfile" role="button" data-bs-toggle="dropdown"
                             aria-expanded="false">
                             Profil
@@ -648,6 +648,7 @@
                             <li><a class="dropdown-item" href="{{ route('portal.sambutan') }}">Sambutan Kepala
                                     Sekolah</a></li>
                             <li><a class="dropdown-item" href="{{ route('portal.visi-misi') }}">Visi & Misi</a></li>
+                            <li><a class="dropdown-item" href="{{ route('portal.kurikulum') }}">Kurikulum</a></li>
                             <li><a class="dropdown-item" href="{{ route('portal.guru') }}">Guru & Staff</a></li>
                             @if(isset($settings) && in_array($settings->jenjang, ['sma', 'smk']))
                             <li><a class="dropdown-item" href="{{ route('portal.jurusan') }}">Jurusan / Keahlian</a></li>

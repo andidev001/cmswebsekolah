@@ -79,6 +79,12 @@ class PortalController extends Controller
         return view('portal.visi-misi', compact('settings'));
     }
 
+    public function kurikulum()
+    {
+        $settings = $this->getSettings();
+        return view('portal.kurikulum', compact('settings'));
+    }
+
     public function guru()
     {
         $settings = $this->getSettings();
