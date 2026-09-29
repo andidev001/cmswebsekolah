@@ -215,7 +215,7 @@
                                 <li><h6 class="dropdown-header text-primary"><i class="fa-solid fa-envelope"></i> Pesan Masuk</h6></li>
                                 @foreach($unreadMessages as $msg)
                                     <li>
-                                        <a href="{{ route('admin.messages') }}" class="dropdown-item py-2">
+                                        <a href="{{ route('admin.notifications.read', ['type' => 'message', 'id' => $msg->id]) }}" class="dropdown-item py-2">
                                             <div class="d-flex justify-content-between">
                                                 <strong class="text-dark" style="font-size: 0.85rem;">{{ $msg->name }}</strong>
                                                 <small class="text-muted" style="font-size: 0.7rem;">{{ $msg->created_at->diffForHumans() }}</small>
@@ -233,7 +233,7 @@
                                 <li><h6 class="dropdown-header text-primary"><i class="fa-solid fa-comments"></i> Komentar Baru</h6></li>
                                 @foreach($unapprovedComments as $comment)
                                     <li>
-                                        <a href="{{ route('admin.comments') }}" class="dropdown-item py-2">
+                                        <a href="{{ route('admin.notifications.read', ['type' => 'comment', 'id' => $comment->id]) }}" class="dropdown-item py-2">
                                             <div class="d-flex justify-content-between">
                                                 <strong class="text-dark" style="font-size: 0.85rem;">{{ $comment->name }}</strong>
                                                 <small class="text-muted" style="font-size: 0.7rem;">{{ $comment->created_at->diffForHumans() }}</small>

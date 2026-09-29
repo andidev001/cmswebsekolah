@@ -74,6 +74,7 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::middleware(['auth'])->prefix('admin')->group(function () {
     // Dashboard
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
+    Route::get('/notifications/read', [DashboardController::class, 'markNotificationAsRead'])->name('admin.notifications.read');
 
     // School Settings
     Route::get('/settings', [SettingController::class, 'index'])->name('admin.settings');

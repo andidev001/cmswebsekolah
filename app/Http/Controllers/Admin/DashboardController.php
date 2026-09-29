@@ -30,4 +30,20 @@ class DashboardController extends Controller
 
         return view('admin.dashboard', compact('stats', 'recent_messages', 'recent_posts'));
     }
+
+    public function markNotificationAsRead(\Illuminate\Http\Request $request)
+    {
+        $type = $request->query('type');
+        $id = $request->query('id');
+
+        if ($type === 'message') {
+            Message::where('id', $id)->update(['is_read' => true]);
+            return redirect()->route('admin.messages');
+        } elseif ($type === 'comment') {
+            \App\Models\Comment::where('id', $id)->update(['is_read' => true]);
+            return redirect()->route('admin.comments');
+        }
+
+        return redirect()->back();
+    }
 }
