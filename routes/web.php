@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\AnnouncementController;
 use App\Http\Controllers\Admin\DownloadController;
+use App\Http\Controllers\Admin\CommentController;
 use App\Http\Controllers\Admin\AgendaController;
 use App\Http\Controllers\Admin\AchievementController;
 use App\Http\Controllers\Admin\AlumniController as AdminAlumniController;
@@ -46,6 +47,7 @@ Route::get('/jurusan', [PortalController::class, 'jurusan'])->name('portal.jurus
 Route::get('/artikel', [PortalController::class, 'artikel'])->name('portal.artikel');
 Route::get('/artikel/kategori/{slug}', [PortalController::class, 'artikelKategori'])->name('portal.artikel.category');
 Route::get('/artikel/{slug}', [PortalController::class, 'artikelDetail'])->name('portal.artikel.detail');
+Route::post('/artikel/komentar/store', [PortalController::class, 'storeComment'])->name('portal.komentar.store')->middleware('throttle:5,1');
 Route::get('/pengumuman', [PortalController::class, 'pengumuman'])->name('portal.pengumuman');
 Route::get('/pengumuman/{slug}', [PortalController::class, 'pengumumanDetail'])->name('portal.pengumuman.detail');
 Route::get('/unduhan', [PortalController::class, 'unduhan'])->name('portal.unduhan');
@@ -122,6 +124,12 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
     Route::get('/posts/show/{id}', [PostController::class, 'show'])->name('admin.posts.show');
     Route::post('/posts/update/{id}', [PostController::class, 'update'])->name('admin.posts.update');
     Route::delete('/posts/destroy/{id}', [PostController::class, 'destroy'])->name('admin.posts.destroy');
+
+    // Komentar
+    Route::get('/comments', [CommentController::class, 'index'])->name('admin.comments');
+    Route::get('/comments/data', [CommentController::class, 'getData'])->name('admin.comments.data');
+    Route::post('/comments/toggle-approve/{id}', [CommentController::class, 'toggleApprove'])->name('admin.comments.toggle-approve');
+    Route::delete('/comments/destroy/{id}', [CommentController::class, 'destroy'])->name('admin.comments.destroy');
 
     // Pengumuman
     Route::get('/announcements', [AnnouncementController::class, 'index'])->name('admin.announcements');

@@ -141,7 +141,9 @@ class PortalController extends Controller
     public function artikelDetail($slug)
     {
         $settings = $this->getSettings();
-        $post = Post::with(['category', 'user'])->where('slug', $slug)->firstOrFail();
+        $post = Post::with(['category', 'user', 'comments' => function($q) {
+            $q->where('is_approved', true)->latest();
+        }])->where('slug', $slug)->firstOrFail();
         $post->increment('views');
 
         $recent_posts = Post::where('status', 'published')
@@ -149,6 +151,29 @@ class PortalController extends Controller
             ->latest()->limit(5)->get();
 
         return view('portal.artikel-detail', compact('settings', 'post', 'recent_posts'));
+    }
+
+    public function storeComment(Request $request)
+    {
+        $request->validate([
+            'post_id' => 'required|exists:posts,id',
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'body' => 'required|string',
+        ]);
+
+        \App\Models\Comment::create([
+            'post_id' => $request->post_id,
+            'name' => $request->name,
+            'email' => $request->email,
+            'body' => $request->body,
+            'is_approved' => false,
+        ]);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Komentar Anda berhasil dikirim dan sedang menunggu persetujuan admin.'
+        ]);
     }
 
     public function pengumuman()

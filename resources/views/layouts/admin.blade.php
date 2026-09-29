@@ -106,6 +106,12 @@
                         <span>Daftar Artikel/Blog</span>
                     </a>
                 </li>
+                <li class="vx-menu-item {{ Route::is('admin.comments*') ? 'active' : '' }}">
+                    <a href="{{ route('admin.comments') }}" class="vx-menu-link">
+                        <i class="fa-solid fa-comments"></i>
+                        <span>Komentar Artikel</span>
+                    </a>
+                </li>
 
                 <div class="vx-menu-header">Informasi Publik</div>
                 <li class="vx-menu-item {{ Route::is('admin.announcements*') ? 'active' : '' }}">
