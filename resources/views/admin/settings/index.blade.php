@@ -119,6 +119,11 @@
                         <input type="text" class="form-control" id="meta_keywords" name="meta_keywords" value="{{ $setting->meta_keywords }}" placeholder="sekolah unggulan, smk terbaik, pendaftaran siswa baru">
                         <small class="text-muted d-block mt-1">Pisahkan dengan koma.</small>
                     </div>
+                    <div class="mb-3">
+                        <label for="google_site_verification" class="form-label">Google Site Verification (Kode HTML Tag)</label>
+                        <input type="text" class="form-control" id="google_site_verification" name="google_site_verification" value="{{ $setting->google_site_verification }}" placeholder="Contoh: 0ldgoPicwGrftnVdSNGMzR9X9SMxO4g-WZ0EHwQji3o">
+                        <small class="text-muted d-block mt-1">Masukkan teks/kode acak dari Google Search Console untuk verifikasi kepemilikan domain.</small>
+                    </div>
                 </div>
 
                 <!-- Right Column: Visi Misi & Sambutan Kepala Sekolah -->

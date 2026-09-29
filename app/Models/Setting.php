@@ -30,6 +30,7 @@ class Setting extends Model
         'youtube_url',
         'meta_description',
         'meta_keywords',
+        'google_site_verification',
         'theme',
         'whatsapp_number',
         'whatsapp_welcome_message',

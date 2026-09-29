@@ -49,6 +49,7 @@ class SettingController extends Controller
             'theme' => 'required|string|in:default,emerald,crimson,amethyst,dark',
             'meta_description' => 'nullable|string',
             'meta_keywords' => 'nullable|string',
+            'google_site_verification' => 'nullable|string',
             'whatsapp_number' => 'nullable|string|max:50',
             'whatsapp_welcome_message' => 'nullable|string',
             'school_logo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',

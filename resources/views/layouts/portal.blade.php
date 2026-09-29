@@ -13,7 +13,9 @@
     <link rel="canonical" href="{{ url()->current() }}">
     
     <!-- Google Site Verification -->
-    <meta name="google-site-verification" content="0ldgoPicwGrftnVdSNGMzR9X9SMxO4g-WZ0EHwQji3o" />
+    @if(isset($settings) && $settings->google_site_verification)
+    <meta name="google-site-verification" content="{{ $settings->google_site_verification }}" />
+    @endif
 
     <!-- Open Graph / Social Media -->
     <meta property="og:title" content="@yield('title') - {{ $settings->school_name ?? 'Sekolah' }}">
