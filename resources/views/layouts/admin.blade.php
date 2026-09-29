@@ -187,6 +187,67 @@
                 <h5 class="m-0 font-weight-bold d-none d-sm-block">@yield('page-title', 'Dashboard')</h5>
             </div>
             <div class="d-flex align-items-center gap-3">
+                <!-- Notifications -->
+                <div class="dropdown me-2">
+                    <a href="#" class="text-decoration-none text-dark position-relative" id="dropdownNotification" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fa-regular fa-bell fs-5"></i>
+                        @if(isset($totalNotifications) && $totalNotifications > 0)
+                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size: 0.6rem;">
+                                {{ $totalNotifications }}
+                            </span>
+                        @endif
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end shadow-sm border-0" aria-labelledby="dropdownNotification" style="width: 300px; max-height: 400px; overflow-y: auto;">
+                        <li>
+                            <div class="dropdown-header fw-bold text-dark d-flex justify-content-between align-items-center">
+                                <span>Notifikasi</span>
+                                @if(isset($totalNotifications) && $totalNotifications > 0)
+                                    <span class="badge bg-primary">{{ $totalNotifications }} Baru</span>
+                                @endif
+                            </div>
+                        </li>
+                        <li><hr class="dropdown-divider"></li>
+                        
+                        @if(isset($totalNotifications) && $totalNotifications == 0)
+                            <li><span class="dropdown-item text-center text-muted py-3">Tidak ada notifikasi baru</span></li>
+                        @else
+                            @if(isset($unreadMessages) && $unreadMessages->count() > 0)
+                                <li><h6 class="dropdown-header text-primary"><i class="fa-solid fa-envelope"></i> Pesan Masuk</h6></li>
+                                @foreach($unreadMessages as $msg)
+                                    <li>
+                                        <a href="{{ route('admin.messages') }}" class="dropdown-item py-2">
+                                            <div class="d-flex justify-content-between">
+                                                <strong class="text-dark" style="font-size: 0.85rem;">{{ $msg->name }}</strong>
+                                                <small class="text-muted" style="font-size: 0.7rem;">{{ $msg->created_at->diffForHumans() }}</small>
+                                            </div>
+                                            <div class="text-muted text-truncate" style="font-size: 0.8rem; max-width: 250px;">{{ $msg->subject }}</div>
+                                        </a>
+                                    </li>
+                                @endforeach
+                            @endif
+
+                            @if(isset($unapprovedComments) && $unapprovedComments->count() > 0)
+                                @if(isset($unreadMessages) && $unreadMessages->count() > 0)
+                                    <li><hr class="dropdown-divider"></li>
+                                @endif
+                                <li><h6 class="dropdown-header text-primary"><i class="fa-solid fa-comments"></i> Komentar Baru</h6></li>
+                                @foreach($unapprovedComments as $comment)
+                                    <li>
+                                        <a href="{{ route('admin.comments') }}" class="dropdown-item py-2">
+                                            <div class="d-flex justify-content-between">
+                                                <strong class="text-dark" style="font-size: 0.85rem;">{{ $comment->name }}</strong>
+                                                <small class="text-muted" style="font-size: 0.7rem;">{{ $comment->created_at->diffForHumans() }}</small>
+                                            </div>
+                                            <div class="text-muted text-truncate" style="font-size: 0.8rem; max-width: 250px;">Pada: {{ $comment->post->title ?? 'Artikel' }}</div>
+                                        </a>
+                                    </li>
+                                @endforeach
+                            @endif
+                        @endif
+                    </ul>
+                </div>
+
+                <!-- User Dropdown -->
                 <div class="dropdown">
                     <a href="#" class="d-flex align-items-center gap-2 text-decoration-none text-dark dropdown-toggle"
                         id="dropdownUser" data-bs-toggle="dropdown" aria-expanded="false">

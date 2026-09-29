@@ -16,11 +16,17 @@ class MessageController extends Controller
 
     public function getData()
     {
-        $messages = Message::select(['id', 'name', 'email', 'subject', 'message', 'created_at']);
+        $messages = Message::select(['id', 'name', 'email', 'subject', 'message', 'is_read', 'created_at'])->latest();
 
         return DataTables::of($messages)
             ->editColumn('created_at', function ($row) {
                 return $row->created_at->format('d M Y H:i');
+            })
+            ->addColumn('status', function ($row) {
+                if ($row->is_read) {
+                    return '<span class="badge bg-secondary">Dibaca</span>';
+                }
+                return '<span class="badge bg-success">Baru</span>';
             })
             ->addColumn('action', function ($row) {
                 return '
@@ -32,13 +38,19 @@ class MessageController extends Controller
                     </button>
                 ';
             })
-            ->rawColumns(['action'])
+            ->rawColumns(['status', 'action'])
             ->make(true);
     }
 
     public function show($id)
     {
         $message = Message::findOrFail($id);
+        
+        if (!$message->is_read) {
+            $message->is_read = true;
+            $message->save();
+        }
+
         $message->date_formatted = $message->created_at->format('d M Y H:i');
         return response()->json($message);
     }
