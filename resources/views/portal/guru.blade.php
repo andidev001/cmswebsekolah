@@ -62,8 +62,17 @@
                             <!-- Card Footer -->
                             <div class="card-footer-section d-flex justify-content-between align-items-center mt-3">
                                 <div class="social-icons d-flex gap-2">
-                                    <a href="#" class="social-link-icon"><i class="fa-brands fa-facebook-f"></i></a>
-                                    <a href="#" class="social-link-icon"><i class="fa-brands fa-instagram"></i></a>
+                                    @if($teacher->facebook_url)
+                                        <a href="{{ $teacher->facebook_url }}" target="_blank" class="social-link-icon"><i class="fa-brands fa-facebook-f"></i></a>
+                                    @else
+                                        <a href="#" class="social-link-icon"><i class="fa-brands fa-facebook-f"></i></a>
+                                    @endif
+
+                                    @if($teacher->instagram_url)
+                                        <a href="{{ $teacher->instagram_url }}" target="_blank" class="social-link-icon"><i class="fa-brands fa-instagram"></i></a>
+                                    @else
+                                        <a href="#" class="social-link-icon"><i class="fa-brands fa-instagram"></i></a>
+                                    @endif
                                 </div>
                                         <button class="btn-lihat-custom" 
                                                 data-name="{{ $teacher->name }}" 

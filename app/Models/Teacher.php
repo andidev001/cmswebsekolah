@@ -16,6 +16,8 @@ class Teacher extends Model
         'position',
         'phone',
         'email',
+        'facebook_url',
+        'instagram_url',
         'photo',
         'is_active',
     ];

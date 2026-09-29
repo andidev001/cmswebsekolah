@@ -69,6 +69,17 @@
                         </div>
                     </div>
 
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="teacher_facebook" class="form-label">Link Facebook</label>
+                            <input type="url" class="form-control" id="teacher_facebook" name="facebook_url" placeholder="https://facebook.com/...">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="teacher_instagram" class="form-label">Link Instagram</label>
+                            <input type="url" class="form-control" id="teacher_instagram" name="instagram_url" placeholder="https://instagram.com/...">
+                        </div>
+                    </div>
+
                     <div class="mb-3">
                         <label for="teacher_position" class="form-label">Jabatan / Mata Pelajaran</label>
                         <input type="text" class="form-control" id="teacher_position" name="position" placeholder="Contoh: Guru Matematika / Kepala Sekolah" required>
@@ -220,6 +231,8 @@ $(document).ready(function() {
                 $('#teacher_nuptk').val(response.nuptk);
                 $('#teacher_phone').val(response.phone);
                 $('#teacher_email').val(response.email);
+                $('#teacher_facebook').val(response.facebook_url);
+                $('#teacher_instagram').val(response.instagram_url);
                 $('#teacher_position').val(response.position);
                 $('#teacher_active').prop('checked', response.is_active);
 
