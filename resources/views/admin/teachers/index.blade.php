@@ -54,6 +54,22 @@
                     </div>
 
                     <div class="mb-3">
+                        <label for="teacher_nuptk" class="form-label">NUPTK (Kosongkan jika tidak ada)</label>
+                        <input type="text" class="form-control" id="teacher_nuptk" name="nuptk" placeholder="Contoh: 123456789...">
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="teacher_phone" class="form-label">No. HP / WA</label>
+                            <input type="text" class="form-control" id="teacher_phone" name="phone" placeholder="Contoh: 08123456789">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="teacher_email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="teacher_email" name="email" placeholder="Contoh: guru@sekolah.com">
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
                         <label for="teacher_position" class="form-label">Jabatan / Mata Pelajaran</label>
                         <input type="text" class="form-control" id="teacher_position" name="position" placeholder="Contoh: Guru Matematika / Kepala Sekolah" required>
                     </div>
@@ -136,6 +152,9 @@ $(document).ready(function() {
         let id = $('#teacher-id').val();
         let url = id ? "{{ url('admin/teachers/update') }}/" + id : "{{ route('admin.teachers.store') }}";
         let formData = new FormData(this);
+        
+        // Menambahkan CSRF token ke FormData secara manual untuk mencegah error 419 di hosting tertentu
+        formData.append('_token', $('meta[name="csrf-token"]').attr('content'));
 
         Swal.fire({
             title: 'Memproses...',
@@ -167,10 +186,16 @@ $(document).ready(function() {
             },
             error: function(xhr) {
                 Swal.close();
-                let errorMsg = 'Terjadi kesalahan sistem.';
-                if (xhr.responseJSON && xhr.responseJSON.errors) {
-                    errorMsg = Object.values(xhr.responseJSON.errors).flat().join('<br>');
+                let errorMsg = 'Terjadi kesalahan sistem. (Code: ' + xhr.status + ')';
+                
+                if (xhr.responseJSON) {
+                    if (xhr.responseJSON.errors) {
+                        errorMsg = Object.values(xhr.responseJSON.errors).flat().join('<br>');
+                    } else if (xhr.responseJSON.message) {
+                        errorMsg = xhr.responseJSON.message;
+                    }
                 }
+                
                 Swal.fire({
                     icon: 'error',
                     title: 'Oops...',
@@ -192,6 +217,9 @@ $(document).ready(function() {
                 $('#teacher-id').val(response.id);
                 $('#teacher_name').val(response.name);
                 $('#teacher_nip').val(response.nip);
+                $('#teacher_nuptk').val(response.nuptk);
+                $('#teacher_phone').val(response.phone);
+                $('#teacher_email').val(response.email);
                 $('#teacher_position').val(response.position);
                 $('#teacher_active').prop('checked', response.is_active);
 

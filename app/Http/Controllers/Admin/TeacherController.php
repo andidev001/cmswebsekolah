@@ -48,8 +48,11 @@ class TeacherController extends Controller
     {
         $data = $request->validate([
             'nip' => 'nullable|string|max:50',
+            'nuptk' => 'nullable|string|max:50',
             'name' => 'required|string|max:255',
             'position' => 'required|string|max:255',
+            'phone' => 'nullable|string|max:20',
+            'email' => 'nullable|email|max:255',
             'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'is_active' => 'nullable|in:0,1,true,false',
         ]);
@@ -83,8 +86,11 @@ class TeacherController extends Controller
 
         $data = $request->validate([
             'nip' => 'nullable|string|max:50',
+            'nuptk' => 'nullable|string|max:50',
             'name' => 'required|string|max:255',
             'position' => 'required|string|max:255',
+            'phone' => 'nullable|string|max:20',
+            'email' => 'nullable|email|max:255',
             'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'is_active' => 'nullable',
         ]);

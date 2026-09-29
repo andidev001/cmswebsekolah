@@ -54,9 +54,9 @@
                             <div class="card-details-section text-center text-white">
                                 <div class="detail-item">Status : {{ $teacher->nip ? 'PNS' : 'GTT / PTT' }}</div>
                                 <div class="detail-item">NIP : {{ $teacher->nip ?? '-' }}</div>
-                                <div class="detail-item">NUPTK : -</div>
-                                <div class="detail-item">HP/WA : -</div>
-                                <div class="detail-item">Email : -</div>
+                                <div class="detail-item">NUPTK : {{ $teacher->nuptk ?? '-' }}</div>
+                                <div class="detail-item">HP/WA : {{ $teacher->phone ?? '-' }}</div>
+                                <div class="detail-item">Email : {{ $teacher->email ?? '-' }}</div>
                             </div>
 
                             <!-- Card Footer -->
@@ -69,6 +69,9 @@
                                                 data-name="{{ $teacher->name }}" 
                                                 data-position="{{ $teacher->position }}" 
                                                 data-nip="{{ $teacher->nip ?? '-' }}" 
+                                                data-nuptk="{{ $teacher->nuptk ?? '-' }}" 
+                                                data-phone="{{ $teacher->phone ?? '-' }}" 
+                                                data-email="{{ $teacher->email ?? '-' }}" 
                                                 data-photo="{{ $teacher->photo_url }}">
                                     Lihat <i class="fa-regular fa-eye ms-1"></i>
                                 </button>
@@ -114,15 +117,15 @@
                         </div>
                         <div class="d-flex justify-content-between mb-2">
                             <span class="text-muted fw-medium">NUPTK</span>
-                            <span class="text-dark fw-bold">-</span>
+                            <span class="text-dark fw-bold" id="modal-teacher-nuptk">-</span>
                         </div>
                         <div class="d-flex justify-content-between mb-2">
                             <span class="text-muted fw-medium">HP/WA</span>
-                            <span class="text-dark fw-bold">-</span>
+                            <span class="text-dark fw-bold" id="modal-teacher-phone">-</span>
                         </div>
                         <div class="d-flex justify-content-between mb-2">
                             <span class="text-muted fw-medium">Email</span>
-                            <span class="text-dark fw-bold">-</span>
+                            <span class="text-dark fw-bold" id="modal-teacher-email">-</span>
                         </div>
                     </div>
                 </div>
@@ -348,12 +351,18 @@ $(document).ready(function() {
         let name = $(this).data('name');
         let position = $(this).data('position');
         let nip = $(this).data('nip');
+        let nuptk = $(this).data('nuptk');
+        let phone = $(this).data('phone');
+        let email = $(this).data('email');
         let photo = $(this).data('photo');
         let status = (nip && nip !== '-') ? 'PNS' : 'GTT / PTT';
 
         $('#modal-teacher-name').text(name);
         $('#modal-teacher-position').text(position);
         $('#modal-teacher-nip').text(nip);
+        $('#modal-teacher-nuptk').text(nuptk);
+        $('#modal-teacher-phone').text(phone);
+        $('#modal-teacher-email').text(email);
         $('#modal-teacher-status').text(status);
         
         let imgElem = $('#modal-teacher-photo');
