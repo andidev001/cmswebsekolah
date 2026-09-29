@@ -13,7 +13,7 @@
         </div>
         <div class="carousel-inner">
             @foreach($carousels as $index => $slide)
-                <div class="carousel-item {{ $index == 0 ? 'active' : '' }}" style="height: 520px; background: linear-gradient(rgba(15, 23, 42, 0.65), rgba(15, 23, 42, 0.65)), url('{{ $slide->image_url }}') no-repeat center center; background-size: cover;">
+                <div class="carousel-item {{ $index == 0 ? 'active' : '' }} hero-slide-item" style="background: linear-gradient(rgba(15, 23, 42, 0.65), rgba(15, 23, 42, 0.65)), url('{{ $slide->image_url }}') no-repeat center center; background-size: cover;">
                     <div class="container h-100 d-flex align-items-center">
                         <div class="col-lg-8 text-white">
                             @if($slide->title)
@@ -23,7 +23,7 @@
                                 <p class="lead mb-4">{{ $slide->subtitle }}</p>
                             @endif
                             @if($slide->button_text && $slide->button_link)
-                                <div class="d-flex gap-3">
+                                <div class="d-flex flex-wrap gap-2 gap-md-3">
                                     <a href="{{ $slide->button_link }}" class="btn btn-primary btn-lg px-4 rounded-pill shadow-sm">{{ $slide->button_text }}</a>
                                 </div>
                             @endif
@@ -41,13 +41,13 @@
         </div>
         <div class="carousel-inner">
             <!-- Slide 1 -->
-            <div class="carousel-item active" style="height: 520px; background: linear-gradient(rgba(15, 23, 42, 0.65), rgba(15, 23, 42, 0.65)), url('https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=1200&q=80') no-repeat center center; background-size: cover;">
+            <div class="carousel-item active hero-slide-item" style="background: linear-gradient(rgba(15, 23, 42, 0.65), rgba(15, 23, 42, 0.65)), url('https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=1200&q=80') no-repeat center center; background-size: cover;">
                 <div class="container h-100 d-flex align-items-center">
                     <div class="col-lg-8 text-white">
                         <span class="badge bg-primary mb-3 px-3 py-2 text-uppercase fs-7" style="letter-spacing: 1px;">Selamat Datang</span>
                         <h1 class="display-4 fw-bold mb-3">Selamat Datang di Portal Resmi {{ $settings->school_name ?? 'SMK Yapisda Cisoka' }}</h1>
                         <p class="lead mb-4">Lembaga pendidikan vokasi terakreditasi A yang unggul, berkarakter islami, menguasai IPTEK, dan berdaya saing tinggi di era globalisasi.</p>
-                        <div class="d-flex gap-3">
+                        <div class="d-flex flex-wrap gap-2 gap-md-3">
                             <a href="{{ route('portal.visi-misi') }}" class="btn btn-outline-light btn-lg px-4 rounded-pill">Visi & Misi</a>
                             @if($settings->external_ppdb_link)
                                 <a href="{{ $settings->external_ppdb_link }}" target="_blank" class="btn btn-ppdb btn-lg text-white"><i class="fa-solid fa-user-plus me-1"></i> PPDB Online</a>
@@ -57,7 +57,7 @@
                 </div>
             </div>
             <!-- Slide 2 -->
-            <div class="carousel-item" style="height: 520px; background: linear-gradient(rgba(15, 23, 42, 0.65), rgba(15, 23, 42, 0.65)), url('https://images.unsplash.com/photo-1581092921461-eab62e97a780?auto=format&fit=crop&w=1200&q=80') no-repeat center center; background-size: cover;">
+            <div class="carousel-item hero-slide-item" style="background: linear-gradient(rgba(15, 23, 42, 0.65), rgba(15, 23, 42, 0.65)), url('https://images.unsplash.com/photo-1581092921461-eab62e97a780?auto=format&fit=crop&w=1200&q=80') no-repeat center center; background-size: cover;">
                 <div class="container h-100 d-flex align-items-center">
                     <div class="col-lg-8 text-white">
                         <span class="badge bg-info mb-3 px-3 py-2 text-uppercase fs-7" style="letter-spacing: 1px;">Kompetensi Keahlian</span>
@@ -68,7 +68,7 @@
                 </div>
             </div>
             <!-- Slide 3 -->
-            <div class="carousel-item" style="height: 520px; background: linear-gradient(rgba(15, 23, 42, 0.65), rgba(15, 23, 42, 0.65)), url('https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=1200&q=80') no-repeat center center; background-size: cover;">
+            <div class="carousel-item hero-slide-item" style="background: linear-gradient(rgba(15, 23, 42, 0.65), rgba(15, 23, 42, 0.65)), url('https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=1200&q=80') no-repeat center center; background-size: cover;">
                 <div class="container h-100 d-flex align-items-center">
                     <div class="col-lg-8 text-white">
                         <span class="badge bg-success mb-3 px-3 py-2 text-uppercase fs-7" style="letter-spacing: 1px;">Prestasi Siswa</span>

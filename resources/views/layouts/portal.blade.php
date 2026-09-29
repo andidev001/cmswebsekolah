@@ -421,6 +421,10 @@
         }
 
         /* Widgets & Sections */
+        .hero-slide-item {
+            height: 520px;
+        }
+
         .section-padding {
             padding: 60px 0;
         }
@@ -466,6 +470,30 @@
                 margin-top: 10px;
                 text-align: center;
                 width: 100%;
+            }
+
+            /* Responsive tweaks for mobile professionalism */
+            .hero-slide-item {
+                height: 400px;
+            }
+            .btn-lg {
+                padding: 0.5rem 1rem !important;
+                font-size: 0.95rem !important;
+            }
+            .display-4 {
+                font-size: 2.2rem !important;
+            }
+            .display-5 {
+                font-size: 1.8rem !important;
+            }
+            .section-title {
+                font-size: 1.5rem !important;
+            }
+            .section-padding {
+                padding: 40px 0;
+            }
+            .card-body.p-4 {
+                padding: 1.25rem !important;
             }
         }
 
