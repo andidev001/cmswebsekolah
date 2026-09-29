@@ -121,6 +121,9 @@ $(document).ready(function() {
         let id = $('#major-id').val();
         let url = id ? "{{ url('admin/majors/update') }}/" + id : "{{ route('admin.majors.store') }}";
         let formData = new FormData(this);
+        
+        // Menambahkan CSRF token ke FormData secara manual untuk mencegah error 419 di hosting tertentu
+        formData.append('_token', $('meta[name="csrf-token"]').attr('content'));
 
         Swal.fire({
             title: 'Memproses...',
@@ -152,10 +155,16 @@ $(document).ready(function() {
             },
             error: function(xhr) {
                 Swal.close();
-                let errorMsg = 'Terjadi kesalahan sistem.';
-                if (xhr.responseJSON && xhr.responseJSON.errors) {
-                    errorMsg = Object.values(xhr.responseJSON.errors).flat().join('<br>');
+                let errorMsg = 'Terjadi kesalahan sistem. (Code: ' + xhr.status + ')';
+                
+                if (xhr.responseJSON) {
+                    if (xhr.responseJSON.errors) {
+                        errorMsg = Object.values(xhr.responseJSON.errors).flat().join('<br>');
+                    } else if (xhr.responseJSON.message) {
+                        errorMsg = xhr.responseJSON.message;
+                    }
                 }
+                
                 Swal.fire({
                     icon: 'error',
                     title: 'Oops...',
