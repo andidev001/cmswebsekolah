@@ -14,7 +14,11 @@
     
     <!-- Google Site Verification -->
     @if(isset($settings) && $settings->google_site_verification)
-    <meta name="google-site-verification" content="{{ $settings->google_site_verification }}" />
+        @if(Str::startsWith(trim($settings->google_site_verification), '<meta'))
+            {!! $settings->google_site_verification !!}
+        @else
+            <meta name="google-site-verification" content="{{ $settings->google_site_verification }}" />
+        @endif
     @endif
 
     <!-- Open Graph / Social Media -->
